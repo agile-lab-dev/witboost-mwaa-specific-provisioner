@@ -42,7 +42,8 @@ ThisBuild / scalacOptions       := Seq(
   "-Ywarn-unused:params",          // Warn if a value parameter is unused.
   "-Ywarn-unused:patvars",         // Warn if a variable bound in a pattern is unused.
   "-Ywarn-unused:privates",        // Warn if a private member is unused.
-  "-Ywarn-value-discard"           // Warn when non-Unit expression results are unused.
+  "-Ywarn-value-discard",          // Warn when non-Unit expression results are unused.
+  "-Ymacro-annotations"
 )
 
 val scalaFixSettings: List[Def.Setting[_]] = List[Def.Setting[_]](scalafixScalaBinaryVersion := "2.13")
@@ -110,7 +111,7 @@ lazy val root = (project in file(".")).settings(
     if (buildVersion == "latest") buildVersion else s"v$buildVersion"
   }".toLowerCase,
   Docker / packageName        :=
-    s"registry.gitlab.com/agilefactory/witboost.mesh/provisioning/witboost.mesh.provisioning.sandbox.mwaaspecificprovisioner",
+    s"registry.gitlab.com/agilefactory/witboost.mesh/provisioning/sandbox/witboost.mesh.provisioning.sandbox.mwaaspecificprovisioner",
   Docker / dockerExposedPorts := Seq(8080),
   onChangedBuildSource        := ReloadOnSourceChanges,
   scalafixOnCompile           := true,

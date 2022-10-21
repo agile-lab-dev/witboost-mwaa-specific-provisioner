@@ -50,10 +50,11 @@ object Dependencies {
 
   private[this] object circe {
     lazy val namespace = "io.circe"
-    lazy val core      = namespace %% "circe-core"    % circeVersion
-    lazy val generic   = namespace %% "circe-generic" % circeVersion
-    lazy val parser    = namespace %% "circe-parser"  % circeVersion
-    lazy val yaml      = namespace %% "circe-yaml"    % circeVersion
+    lazy val core      = namespace %% "circe-core"           % circeVersion
+    lazy val generic   = namespace %% "circe-generic"        % circeVersion
+    lazy val parser    = namespace %% "circe-parser"         % circeVersion
+    lazy val yaml      = namespace %% "circe-yaml"           % circeVersion
+    lazy val extra     = namespace %% "circe-generic-extras" % circeVersion
   }
 
   private[this] object json4s {
@@ -126,6 +127,7 @@ object Dependencies {
       circe.generic                % Compile,
       circe.parser                 % Compile,
       circe.yaml                   % Compile,
+      circe.extra                  % Compile,
       scalikeJDBC.core             % Compile,
       scalikeJDBC.autoMacro        % Compile,
       flywaydb.core                % Compile,

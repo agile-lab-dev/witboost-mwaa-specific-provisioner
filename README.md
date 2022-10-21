@@ -38,4 +38,13 @@ run
 ```
 
 ### API UI from browser
-- When the app is running use the following link to access the API [swagger](http://127.0.0.1:8093/datamesh.specificprovisioner/0.0/swagger/docs/index.html)
+- When the app is running use the following link to access the API [swagger](http://127.0.0.1:8093/datamesh.mwaaspecificprovisioner/0.0/swagger/docs/index.html)
+
+### RUN AIRFLOW LOCALLY
+ In order to launch Airflow locally you need to execute the following commands:
+ 
+```bash
+cd docker                      # to move to the docker folder
+docker-compose up airflow-init # to build the database
+docker-compose up              # to start airflow at http://localhost:{PORT} url
+```

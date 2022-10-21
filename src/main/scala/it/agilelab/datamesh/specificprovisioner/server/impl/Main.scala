@@ -7,14 +7,15 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives.complete
 import akka.http.scaladsl.server.directives.{Credentials, SecurityDirectives}
 import buildinfo.BuildInfo
+import com.typesafe.scalalogging.LazyLogging
 import it.agilelab.datamesh.specificprovisioner.api.intepreter.{ProvisionerApiMarshallerImpl, ProvisionerApiServiceImpl}
-import it.agilelab.datamesh.specificprovisioner.api.{SpecificProvisionerApi, SpecificProvisionerApiService}
-import it.agilelab.datamesh.specificprovisioner.server.Controller
+import it.agilelab.datamesh.mwaaspecificprovisioner.api.{SpecificProvisionerApi, SpecificProvisionerApiService}
+import it.agilelab.datamesh.mwaaspecificprovisioner.server.Controller
 import it.agilelab.datamesh.specificprovisioner.system.ApplicationConfiguration.httpPort
 
 import scala.jdk.CollectionConverters._
 
-object Main {
+object Main extends LazyLogging {
 
   def run(port: Int, impl: SpecificProvisionerApiService): ActorSystem[Nothing] = ActorSystem[Nothing](
     Behaviors.setup[Nothing] { context =>
@@ -30,16 +31,16 @@ object Main {
       val controller = new Controller(
         api,
         validationExceptionToRoute = Some { e =>
-          println(e)
+          logger.error(s"Error: ", e)
           val results = e.results()
           if (Option(results).isDefined) {
-            results.crumbs().asScala.foreach(crumb => println(crumb.crumb()))
+            results.crumbs().asScala.foreach(crumb => logger.info(crumb.crumb()))
             results.items().asScala.foreach { item =>
-              println(item.dataCrumbs())
-              println(item.dataJsonPointer())
-              println(item.schemaCrumbs())
-              println(item.message())
-              println(item.severity())
+              logger.info(item.dataCrumbs())
+              logger.info(item.dataJsonPointer())
+              logger.info(item.schemaCrumbs())
+              logger.info(item.message())
+              logger.info("Severity: ", item.severity())
             }
             val message = e.results().items().asScala.map(_.message()).mkString("\n")
             complete((400, message))

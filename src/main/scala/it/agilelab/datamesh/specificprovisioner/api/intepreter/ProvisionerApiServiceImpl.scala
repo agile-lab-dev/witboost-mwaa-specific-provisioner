@@ -3,15 +3,21 @@ package it.agilelab.datamesh.specificprovisioner.api.intepreter
 import akka.http.scaladsl.marshalling.ToEntityMarshaller
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
+import cats.data.NonEmptyList
+import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport.{marshaller, unmarshaller}
-import it.agilelab.datamesh.specificprovisioner.api.SpecificProvisionerApiService
-import it.agilelab.datamesh.specificprovisioner.model._
+import it.agilelab.datamesh.mwaaspecificprovisioner.api.SpecificProvisionerApiService
+import it.agilelab.datamesh.mwaaspecificprovisioner.model._
+import it.agilelab.datamesh.specificprovisioner.model.ProvisioningRequestDescriptor
+import it.agilelab.datamesh.specificprovisioner.mwaa.{MwaaManager, MwaaManagerError}
 
-class ProvisionerApiServiceImpl extends SpecificProvisionerApiService {
+class ProvisionerApiServiceImpl extends SpecificProvisionerApiService with LazyLogging {
 
   // Json String
   implicit val toEntityMarshallerJsonString: ToEntityMarshaller[String]       = marshaller[String]
   implicit val toEntityUnmarshallerJsonString: FromEntityUnmarshaller[String] = unmarshaller[String]
+
+  private val mwaaManager = new MwaaManager
 
   /** Code: 200, Message: The request status, DataType: Status
    *  Code: 400, Message: Invalid input, DataType: ValidationError
@@ -34,7 +40,20 @@ class ProvisionerApiServiceImpl extends SpecificProvisionerApiService {
       toEntityMarshallerSystemError: ToEntityMarshaller[SystemError],
       toEntityMarshallerProvisioningStatus: ToEntityMarshaller[ProvisioningStatus],
       toEntityMarshallerValidationError: ToEntityMarshaller[ValidationError]
-  ): Route = provision202("\"OK\"")
+  ): Route = ProvisioningRequestDescriptor(provisioningRequest.descriptor).flatMap(mwaaManager.executeProvision) match {
+    case Left(e: MwaaManagerError) =>
+      logger.error(e.errorMessage)
+      provision500(SystemError(e.errorMessage))
+    case Left(e: NonEmptyList[_])  =>
+      logger.error(e.head.toString)
+      provision400(ValidationError(e.toList.map(_.toString)))
+    case Right(result)             =>
+      logger.info(result)
+      provision202(result)
+    case _                         =>
+      logger.error("Generic Error")
+      provision500(SystemError("Generic Error"))
+  }
 
   /** Code: 200, Message: It synchronously returns the request result, DataType: String
    *  Code: 400, Message: Invalid input, DataType: ValidationError

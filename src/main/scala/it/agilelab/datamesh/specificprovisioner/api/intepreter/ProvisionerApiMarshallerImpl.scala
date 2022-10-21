@@ -5,8 +5,8 @@ import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder}
-import it.agilelab.datamesh.specificprovisioner.api.SpecificProvisionerApiMarshaller
-import it.agilelab.datamesh.specificprovisioner.model._
+import it.agilelab.datamesh.mwaaspecificprovisioner.api.SpecificProvisionerApiMarshaller
+import it.agilelab.datamesh.mwaaspecificprovisioner.model._
 
 class ProvisionerApiMarshallerImpl extends SpecificProvisionerApiMarshaller {
 
