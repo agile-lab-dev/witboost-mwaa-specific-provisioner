@@ -11,5 +11,6 @@ object Constants {
   val SPECIFIC_FIELD                   = "specific"
   val KIND_FIELD                       = "kind"
   val COMPONENT_ID_TO_PROVISION_FIELD  = "componentIdToProvision"
-  val DAG_NAME_FIELD                   = "dagName"
+  val DESTINATION_DAG_FIELD            = "destinationDag"
+  val SOURCE_DAG_FIELD                 = "sourceDag"
 }

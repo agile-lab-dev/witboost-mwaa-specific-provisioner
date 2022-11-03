@@ -32,7 +32,8 @@ dataProduct:
       storageType: SQL
       tags: [ ]
       specific:
-        sourceBucket: my-loop-bucket
-        destinationBucket: testmwaa
-        dagName: altro.txt
+        sourceBucket: aws-ia-mwaa-eu-central-1-278435202378
+        destinationBucket: aws-ia-mwaa-eu-central-1-278435202378
+        destinationDag: dags/airbyte_snowflake_dag.py
+        sourceDag: letssee/airbyte_snowflake_dag.py
 componentIdToProvision: domain:marketing.Marketing-Invoice-S3-Ingestion-Data-1.1
