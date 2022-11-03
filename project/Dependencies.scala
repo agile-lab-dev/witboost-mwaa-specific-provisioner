@@ -103,6 +103,17 @@ object Dependencies {
     lazy val core      = namespace %% "scalatest" % scalatestVersion
   }
 
+  private[this] object scalamock {
+    lazy val namespace = "org.scalamock"
+    lazy val core      = namespace %% "scalamock" % "5.2.0"
+  }
+
+  private[this] object awsS3Sdk {
+    lazy val namespace = "software.amazon.awssdk"
+    lazy val s3Core    = namespace % "s3"        % "2.18.1"
+    lazy val s3Control = namespace % "s3control" % "2.18.1"
+  }
+
   object Jars {
 
     lazy val overrides: Seq[ModuleID] = Seq(
@@ -138,7 +149,10 @@ object Dependencies {
       logback.classic              % Compile,
       openapi4j.operationValidator % Compile,
       h2database.jdbc              % Compile,
-      scalatest.core               % Test
+      awsS3Sdk.s3Core              % Compile,
+      awsS3Sdk.s3Control           % Compile,
+      scalatest.core               % Test,
+      scalamock.core               % Test
     )
 
     lazy val client: Seq[ModuleID] = Seq(

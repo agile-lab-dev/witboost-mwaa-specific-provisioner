@@ -136,3 +136,4 @@ client-generated/src/
 client-generated/docs/
 client-generated/project/build.properties
 openapitools.json
+credentials

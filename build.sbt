@@ -96,8 +96,14 @@ lazy val clientGenerated = project.in(file("client-generated")).settings(
   scalacOptions                                        := Seq(),
   libraryDependencies                                  := Dependencies.Jars.client,
   coverageEnabled                                      := false,
-  app.k8ty.sbt.gitlab.K8tyGitlabPlugin.gitlabProjectId := "34805714"
+  app.k8ty.sbt.gitlab.K8tyGitlabPlugin.gitlabProjectId := "40117109"
 ).enablePlugins(K8tyGitlabPlugin)
+
+lazy val awsIntegration = project.in(file("aws-integration")).settings(
+  name          := "datamesh.mwaaspecificprovisioner.aws",
+  scalacOptions := Seq(),
+  libraryDependencies ++= Dependencies.Jars.`server`
+).setupBuildInfo
 
 lazy val root = (project in file(".")).settings(
   name                        := "datamesh.mwaaspecificprovisioner",
@@ -117,5 +123,5 @@ lazy val root = (project in file(".")).settings(
   scalafixOnCompile           := true,
   semanticdbEnabled           := true,
   semanticdbVersion           := scalafixSemanticdb.revision
-).aggregate(clientGenerated).dependsOn(serverGenerated).enablePlugins(JavaAppPackaging, MultiJvmPlugin)
+).aggregate(clientGenerated).dependsOn(serverGenerated, awsIntegration).enablePlugins(JavaAppPackaging, MultiJvmPlugin)
   .configs(MultiJvm).setupBuildInfo

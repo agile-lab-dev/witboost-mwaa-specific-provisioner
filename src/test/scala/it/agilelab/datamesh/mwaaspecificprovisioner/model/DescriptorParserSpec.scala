@@ -2,7 +2,7 @@ package it.agilelab.datamesh.mwaaspecificprovisioner.model
 
 import cats.data.{EitherNel, NonEmptyList}
 import it.agilelab.datamesh.mwaaspecificprovisioner.common.test.getTestResourceAsString
-import it.agilelab.datamesh.specificprovisioner.model.{DataProductDescriptor, ProvisioningRequestDescriptor}
+import it.agilelab.datamesh.mwaaspecificprovisioner.model.{DataProductDescriptor, ProvisioningRequestDescriptor}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.EitherValues._
 import org.scalatest.matchers.should.Matchers._
