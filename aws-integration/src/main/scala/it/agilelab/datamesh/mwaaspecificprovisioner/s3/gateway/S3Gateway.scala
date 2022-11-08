@@ -1,6 +1,7 @@
 package it.agilelab.datamesh.mwaaspecificprovisioner.s3.gateway
 
 import it.agilelab.datamesh.mwaaspecificprovisioner.s3.gateway.S3GatewayError.S3GatewayInitError
+import software.amazon.awssdk.auth.credentials.WebIdentityTokenFileCredentialsProvider
 import software.amazon.awssdk.services.s3.S3Client
 import software.amazon.awssdk.services.s3.model.{DeleteMarkerEntry, ObjectVersion, S3Object}
 
@@ -96,7 +97,7 @@ object S3Gateway {
 
   def apply: Either[S3GatewayInitError, S3Gateway] =
     try {
-      val s3Client = S3Client.builder.build
+      val s3Client = S3Client.builder.credentialsProvider(WebIdentityTokenFileCredentialsProvider.create()).build
       Right(new DefaultS3Gateway(s3Client))
     } catch { case t: Throwable => Left(S3GatewayInitError(t)) }
 

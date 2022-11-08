@@ -46,23 +46,23 @@ class MwaaManager(s3Client: S3Gateway) extends LazyLogging {
     } yield sourceBucket
   }
 
-  def getDestinationDag(descriptor: ProvisioningRequestDescriptor): Either[GetDagNameError, String] = {
+  def getDestinationDag(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
     logger.info("Starting executing getDestinationDag method")
     for {
       component <- descriptor.getComponentToProvision
-        .toRight(GetDagNameError(descriptor, "Unable to find the component to provision"))
+        .toRight(GetDestinationDagError(descriptor, "Unable to find the component to provision"))
       dagName   <- component.specific.hcursor.downField(Constants.DESTINATION_DAG_FIELD).as[String]
-        .leftMap(error => GetDagNameError(descriptor, error.getMessage))
+        .leftMap(error => GetDestinationDagError(descriptor, error.getMessage))
     } yield dagName
   }
 
-  def getSourceDag(descriptor: ProvisioningRequestDescriptor): Either[GetDagNameError, String] = {
+  def getSourceDag(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
     logger.info("Starting executing getSourceDag method")
     for {
       component <- descriptor.getComponentToProvision
-        .toRight(GetDagNameError(descriptor, "Unable to find the component to provision"))
+        .toRight(GetSourceDagError(descriptor, "Unable to find the component to provision"))
       dagName   <- component.specific.hcursor.downField(Constants.SOURCE_DAG_FIELD).as[String]
-        .leftMap(error => GetDagNameError(descriptor, error.getMessage))
+        .leftMap(error => GetSourceDagError(descriptor, error.getMessage))
     } yield dagName
   }
 

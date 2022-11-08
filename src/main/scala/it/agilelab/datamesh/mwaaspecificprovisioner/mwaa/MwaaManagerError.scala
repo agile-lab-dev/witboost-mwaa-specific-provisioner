@@ -10,8 +10,13 @@ final case class SendRequestError(dagName: String, error: String) extends MwaaMa
   override def errorMessage: String = s"SendRequestError($dagName, $error)"
 }
 
-final case class GetDagNameError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
-  override def errorMessage: String = s"GetDagNameError($descriptor, $error)"
+final case class GetDestinationDagError(descriptor: ProvisioningRequestDescriptor, error: String)
+    extends MwaaManagerError {
+  override def errorMessage: String = s"GetDestinationDagError($descriptor, $error)"
+}
+
+final case class GetSourceDagError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
+  override def errorMessage: String = s"GetSourceDagError($descriptor, $error)"
 }
 
 final case class GetSourceBucketError(descriptor: ProvisioningRequestDescriptor, error: String)

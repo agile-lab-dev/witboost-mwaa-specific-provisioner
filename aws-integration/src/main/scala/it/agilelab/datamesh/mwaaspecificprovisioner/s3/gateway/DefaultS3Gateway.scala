@@ -69,10 +69,10 @@ class DefaultS3Gateway(s3Client: S3Client) extends S3Gateway with LazyLogging {
     try {
       logger.info(
         "Starting copy objects from {} with key {} to {} with key {}",
-        destinationBucket,
-        destinationKey,
         sourceBucket,
-        sourceKey
+        sourceKey,
+        destinationBucket,
+        destinationKey
       )
       val copyObjectRequest = CopyObjectRequest.builder().destinationBucket(destinationBucket)
         .destinationKey(destinationKey).sourceBucket(sourceBucket).sourceKey(sourceKey).build()

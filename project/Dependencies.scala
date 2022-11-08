@@ -110,8 +110,9 @@ object Dependencies {
 
   private[this] object awsS3Sdk {
     lazy val namespace = "software.amazon.awssdk"
-    lazy val s3Core    = namespace % "s3"        % "2.18.1"
-    lazy val s3Control = namespace % "s3control" % "2.18.1"
+    lazy val s3Core    = namespace % "s3"        % "2.18.6"
+    lazy val s3Control = namespace % "s3control" % "2.18.6"
+    lazy val sts       = namespace % "sts"       % "2.18.6"
   }
 
   object Jars {
@@ -151,6 +152,7 @@ object Dependencies {
       h2database.jdbc              % Compile,
       awsS3Sdk.s3Core              % Compile,
       awsS3Sdk.s3Control           % Compile,
+      awsS3Sdk.sts                 % Compile,
       scalatest.core               % Test,
       scalamock.core               % Test
     )
