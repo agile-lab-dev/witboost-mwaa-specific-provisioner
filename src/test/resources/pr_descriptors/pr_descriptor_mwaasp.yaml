@@ -32,8 +32,11 @@ dataProduct:
       storageType: SQL
       tags: [ ]
       specific:
-        sourceBucket: aws-ia-mwaa-eu-central-1-278435202378
-        destinationBucket: aws-ia-mwaa-eu-central-1-278435202378
-        destinationDag: dags/airbyte_snowflake_dag.py
-        sourceDag: letssee/airbyte_snowflake_dag.py
+        scheduleCron: 0 0 1 1 *
+        dagName: airbyte_snowflake_dag.py
+        sqlName: snowflake.sql
+        connectionName: connection_name
+        destinationPath: dags/
+        sourcePath: source/
+        bucketName: aws-ia-mwaa-eu-central-1-278435202378
 componentIdToProvision: domain:marketing.Marketing-Invoice-S3-Ingestion-Data-1.1

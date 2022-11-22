@@ -11,59 +11,64 @@ class MwaaManager(s3Client: S3Gateway) extends LazyLogging {
   def executeProvision(descriptor: ProvisioningRequestDescriptor): Either[Product, Unit] = {
     logger.info("Starting executing executeProvision method")
     for {
-      destinationDag    <- getDestinationDag(descriptor)
-      sourceDag         <- getSourceDag(descriptor)
-      sourceBucket      <- getSourceBucket(descriptor)
-      destinationBucket <- getDestinationBucket(descriptor)
-      _                 <- s3Client.copyObject(destinationBucket, destinationDag, sourceBucket, sourceDag)
+      dagName         <- getDagName(descriptor)
+      component       <- getComponent(descriptor)
+      destinationPath <- getDestinationPath(descriptor)
+      sourcePath      <- getSourcePath(descriptor)
+      bucketName      <- getBucketName(descriptor)
+      urnArray = component.id.split(":")
+      prefix   = s"${urnArray(3)}.${urnArray(4)}.${urnArray(5)}."
+      _ <- s3Client
+        .copyObject(bucketName, s"$destinationPath$prefix$dagName", bucketName, s"$sourcePath$prefix$dagName")
     } yield ()
   }
 
   def executeUnprovision(descriptor: ProvisioningRequestDescriptor): Either[Product, Unit] = {
     logger.info("Starting executing executeUnprovision method")
     for {
-      dagName           <- getDestinationDag(descriptor)
-      destinationBucket <- getDestinationBucket(descriptor)
-      _                 <- s3Client.deleteObject(destinationBucket, dagName)
+      dagName         <- getDagName(descriptor)
+      bucketName      <- getBucketName(descriptor)
+      destinationPath <- getDestinationPath(descriptor)
+      _               <- s3Client.deleteObject(bucketName, s"$destinationPath$dagName")
     } yield ()
   }
 
-  def getDestinationBucket(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
-    logger.info("Starting executing getDestinationBucket method")
+  def getDagName(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
+    logger.info("Starting executing getDagName method")
     for {
-      component       <- getComponent(descriptor)
-      destinationPath <- component.specific.hcursor.downField("destinationBucket").as[String]
-        .leftMap(error => GetDestinationBucketError(descriptor, error.getMessage))
-    } yield destinationPath
+      component <- descriptor.getComponentToProvision
+        .toRight(GetDagName(descriptor, "Unable to find the component to provision"))
+      dagName   <- component.specific.hcursor.downField(Constants.DAG_NAME_FIELD).as[String]
+        .leftMap(error => GetDagName(descriptor, error.getMessage))
+    } yield dagName
   }
 
-  def getSourceBucket(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
-    logger.info("Starting executing getSourceBucket method")
+  def getBucketName(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
+    logger.info("Starting executing getBucketName method")
     for {
       component    <- getComponent(descriptor)
-      sourceBucket <- component.specific.hcursor.downField("sourceBucket").as[String]
-        .leftMap(error => GetSourceBucketError(descriptor, error.getMessage))
+      sourceBucket <- component.specific.hcursor.downField(Constants.BUCKET_NAME_FIELD).as[String]
+        .leftMap(error => GetBucketNameError(descriptor, error.getMessage))
     } yield sourceBucket
   }
 
-  def getDestinationDag(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
-    logger.info("Starting executing getDestinationDag method")
+  def getDestinationPath(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
+    logger.info("Starting executing getDestinationPath method")
     for {
       component <- descriptor.getComponentToProvision
-        .toRight(GetDestinationDagError(descriptor, "Unable to find the component to provision"))
-      dagName   <- component.specific.hcursor.downField(Constants.DESTINATION_DAG_FIELD).as[String]
-        .leftMap(error => GetDestinationDagError(descriptor, error.getMessage))
+        .toRight(GetDestinationPathError(descriptor, "Unable to find the component to provision"))
+      dagName   <- component.specific.hcursor.downField(Constants.DESTINATION_DAG_PATH_FIELD).as[String]
+        .leftMap(error => GetDestinationPathError(descriptor, error.getMessage))
     } yield dagName
   }
 
-  def getSourceDag(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
-    logger.info("Starting executing getSourceDag method")
+  def getSourcePath(descriptor: ProvisioningRequestDescriptor): Either[MwaaManagerError with Product, String] = {
+    logger.info("Starting executing getSourcePath method")
     for {
-      component <- descriptor.getComponentToProvision
-        .toRight(GetSourceDagError(descriptor, "Unable to find the component to provision"))
-      dagName   <- component.specific.hcursor.downField(Constants.SOURCE_DAG_FIELD).as[String]
-        .leftMap(error => GetSourceDagError(descriptor, error.getMessage))
-    } yield dagName
+      component    <- getComponent(descriptor)
+      sourceBucket <- component.specific.hcursor.downField(Constants.SOURCE_DAG_PATH_FIELD).as[String]
+        .leftMap(error => GetSourcePathError(descriptor, error.getMessage))
+    } yield sourceBucket
   }
 
   private def getComponent(

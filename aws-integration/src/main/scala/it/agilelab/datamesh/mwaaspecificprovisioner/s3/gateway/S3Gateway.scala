@@ -97,7 +97,7 @@ object S3Gateway {
 
   def apply: Either[S3GatewayInitError, S3Gateway] =
     try {
-      val s3Client = S3Client.builder.credentialsProvider(WebIdentityTokenFileCredentialsProvider.create()).build
+      val s3Client = S3Client.builder.build
       Right(new DefaultS3Gateway(s3Client))
     } catch { case t: Throwable => Left(S3GatewayInitError(t)) }
 

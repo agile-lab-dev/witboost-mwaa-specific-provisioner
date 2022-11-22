@@ -10,23 +10,21 @@ final case class SendRequestError(dagName: String, error: String) extends MwaaMa
   override def errorMessage: String = s"SendRequestError($dagName, $error)"
 }
 
-final case class GetDestinationDagError(descriptor: ProvisioningRequestDescriptor, error: String)
-    extends MwaaManagerError {
-  override def errorMessage: String = s"GetDestinationDagError($descriptor, $error)"
+final case class GetDagName(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
+  override def errorMessage: String = s"GetDagName($descriptor, $error)"
 }
 
-final case class GetSourceDagError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
-  override def errorMessage: String = s"GetSourceDagError($descriptor, $error)"
+final case class GetBucketNameError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
+  override def errorMessage: String = s"GetBucketNameError($descriptor, $error)"
 }
 
-final case class GetSourceBucketError(descriptor: ProvisioningRequestDescriptor, error: String)
+final case class GetDestinationPathError(descriptor: ProvisioningRequestDescriptor, error: String)
     extends MwaaManagerError {
-  override def errorMessage: String = s"GetSourceBucketError($descriptor, $error)"
+  override def errorMessage: String = s"GetDestinationPathError($descriptor, $error)"
 }
 
-final case class GetDestinationBucketError(descriptor: ProvisioningRequestDescriptor, error: String)
-    extends MwaaManagerError {
-  override def errorMessage: String = s"GetDestinationBucketError($descriptor, $error)"
+final case class GetSourcePathError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
+  override def errorMessage: String = s"GetSourcePathError($descriptor, $error)"
 }
 
 final case class GetComponentError(descriptor: ProvisioningRequestDescriptor, error: String) extends MwaaManagerError {
