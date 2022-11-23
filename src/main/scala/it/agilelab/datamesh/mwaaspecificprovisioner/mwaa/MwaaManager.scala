@@ -29,7 +29,10 @@ class MwaaManager(s3Client: S3Gateway) extends LazyLogging {
       dagName         <- getDagName(descriptor)
       bucketName      <- getBucketName(descriptor)
       destinationPath <- getDestinationPath(descriptor)
-      _               <- s3Client.deleteObject(bucketName, s"$destinationPath$dagName")
+      component       <- getComponent(descriptor)
+      urnArray = component.id.split(":")
+      prefix   = s"${urnArray(3)}.${urnArray(4)}.${urnArray(5)}."
+      _ <- s3Client.deleteObject(bucketName, s"$destinationPath$prefix$dagName")
     } yield ()
   }
 
