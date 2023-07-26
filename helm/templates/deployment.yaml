@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ template "mwaa-specific-provisioner.name" . }}
+{{- include "mwaa-specific-provisioner.labels" . | nindent 4 }}
+  name: {{ template "mwaa-specific-provisioner.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "mwaa-specific-provisioner.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "mwaa-specific-provisioner.name" . }}
+        actorSystemName: {{ template "mwaa-specific-provisioner.name" . }}
+    spec:
+      automountServiceAccountToken: false
+      {{- if .Values.dockerRegistrySecretName }}
+      imagePullSecrets:
+        - name: {{ .Values.dockerRegistrySecretName }}
+      {{- end}}
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "mwaa-specific-provisioner.fullname" . }}-config
+            defaultMode: 420
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.registry }}:{{ .Values.image.tag }}
+          command: ["bin/datamesh-mwaaspecificprovisioner"]
+          args: ["-Dconfig.file=etc/configs/application.conf", "-Dlogback.configurationFile=etc/configs/logback.xml", "-Dconfig.override_with_env_vars=true"]
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: management
+              containerPort: 8558
+              protocol: TCP
+            - name: http
+              containerPort: 8093
+              protocol: TCP
+          {{- if .Values.securityContext }}
+          securityContext: {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe: {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe: {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- end }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: AWS_REGION
+              value: {{ .Values.credentials.awsRegion }}
+          volumeMounts:
+            - name: config
+              mountPath: /opt/docker/etc/configs

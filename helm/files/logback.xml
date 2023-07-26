@@ -17,6 +17,7 @@
     <logger name="scalikejdbc" level="INFO"/>
     <logger name="akka.event.slf4j" level="ERROR"/>
 
+
     <root level="INFO">
         <appender-ref ref="ASYNC"/>
     </root>
