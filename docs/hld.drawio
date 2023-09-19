@@ -1,0 +1,218 @@
+<mxfile host="Electron" modified="2023-09-18T15:56:33.099Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="n7m3r8ep6MIr5C23Tgo1" version="21.1.2" type="device" pages="2">
+  <diagram name="Overview" id="olF5ttRBlWVvdxKSSwJD">
+    <mxGraphModel dx="2074" dy="1129" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-0" />
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-1" parent="KEZqLQ1N2geyIQ-xhBZk-0" />
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-28" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-30" target="KEZqLQ1N2geyIQ-xhBZk-33" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-29" value="4 - Deploy,&lt;br&gt;update DP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-28" vertex="1" connectable="0">
+          <mxGeometry x="-0.0027" y="-2" relative="1" as="geometry">
+            <mxPoint x="22" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-16" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-30" target="ugHWY-jnCkU6N2jLu0gr-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-17" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;1 - Push DAG&lt;br&gt;code&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="ugHWY-jnCkU6N2jLu0gr-16" vertex="1" connectable="0">
+          <mxGeometry x="0.0086" relative="1" as="geometry">
+            <mxPoint x="-10" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-30" value="DP team" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;hachureGap=4;fontFamily=Nunito;fontSize=16;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="228" y="787" width="60" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-31" value="" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-33" target="KEZqLQ1N2geyIQ-xhBZk-35" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-32" value="5 - Deploy,&lt;br&gt;update DP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-31" vertex="1" connectable="0">
+          <mxGeometry x="0.3239" relative="1" as="geometry">
+            <mxPoint x="-26" y="-31" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-33" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;Witboost&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;glass=0;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="528" y="1007" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-34" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-35" target="KEZqLQ1N2geyIQ-xhBZk-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-289.47" y="1460.75" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-35" value="Provisioning Coordinator" style="whiteSpace=wrap;html=1;fontSize=20;fontFamily=Nunito;fillColor=#fff2cc;strokeColor=#d6b656;rounded=0;hachureGap=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;glass=0;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="888" y="1008.25" width="200" height="118.75" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-36" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;6&amp;nbsp; - Provisioning, unprovisioning&lt;/font&gt;&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1128" y="1017" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-2" target="KEZqLQ1N2geyIQ-xhBZk-43" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-1" value="7 - Copy/delete DAG files&lt;br&gt;between staging and final&lt;br&gt;paths" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Nunito;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;fontSize=16;" parent="ugHWY-jnCkU6N2jLu0gr-0" vertex="1" connectable="0">
+          <mxGeometry x="0.0402" y="7" relative="1" as="geometry">
+            <mxPoint y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-20" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="ugHWY-jnCkU6N2jLu0gr-7" target="KEZqLQ1N2geyIQ-xhBZk-43" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-21" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;3 - Copy DAG file to&lt;br&gt;S3 staging path&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="ugHWY-jnCkU6N2jLu0gr-20" vertex="1" connectable="0">
+          <mxGeometry x="0.0868" relative="1" as="geometry">
+            <mxPoint x="-9" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-7" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;MWAA component CI/CD pipeline&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=middle;fillColor=#f8ecfe;strokeColor=#9673a6;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;glass=0;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="888.4100000000001" y="567.87" width="199.59" height="118.75" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-15" value="" style="group" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1" connectable="0">
+          <mxGeometry x="578" y="576.63" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-12" value="MWAA component Git repository" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8.999999999999915;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=top;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="ugHWY-jnCkU6N2jLu0gr-15" vertex="1">
+          <mxGeometry x="-50" y="-10.009999999999991" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-13" value="&lt;h1 style=&quot;line-height: 50%; font-size: 12px;&quot;&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;domain.dataproduct.0.dag.py&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/h1&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="ugHWY-jnCkU6N2jLu0gr-15" vertex="1">
+          <mxGeometry x="-50" y="81.76" width="206.92" height="28.232" as="geometry" />
+        </mxCell>
+        <mxCell id="mUgCoobgLQafgeZf694w-2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://about.gitlab.com/images/press/logo/png/gitlab-logo-500.png;" parent="ugHWY-jnCkU6N2jLu0gr-15" vertex="1">
+          <mxGeometry x="-100" y="-59.629999999999995" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-18" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="ugHWY-jnCkU6N2jLu0gr-12" target="ugHWY-jnCkU6N2jLu0gr-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-19" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;2 - Trigger&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="ugHWY-jnCkU6N2jLu0gr-18" vertex="1" connectable="0">
+          <mxGeometry x="-0.3" y="-2" relative="1" as="geometry">
+            <mxPoint x="24" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-2" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;MWAA SP&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1288.42" y="927" width="380" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="GK8bcZbs766-iHouz0xo-0" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;&lt;br&gt;&lt;br&gt;Responsible for provisioning and unprovisioning operations on the Airflow/MWAA DAGs.&lt;br&gt;&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;hachureGap=4;fontFamily=Nunito;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;fontSize=16;fontColor=default;align=left;verticalAlign=top;spacingLeft=4;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1322.9654545454546" y="986.38" width="310.90909090909093" height="190.63" as="geometry" />
+        </mxCell>
+        <mxCell id="D-cZPUOV2xCUMHWo-okC-1" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="KEZqLQ1N2geyIQ-xhBZk-1" source="KEZqLQ1N2geyIQ-xhBZk-43" target="D-cZPUOV2xCUMHWo-okC-0" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="D-cZPUOV2xCUMHWo-okC-2" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;8 - Load DAGs&lt;br&gt;from final path&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="D-cZPUOV2xCUMHWo-okC-1" vertex="1" connectable="0">
+          <mxGeometry x="0.053" y="-1" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mUgCoobgLQafgeZf694w-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://about.gitlab.com/images/press/logo/png/gitlab-logo-500.png;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="838" y="517" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mUgCoobgLQafgeZf694w-5" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#FF4F8B;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_workflows_for_apache_airflow;fontFamily=Helvetica;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1258" y="887" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="D-cZPUOV2xCUMHWo-okC-0" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#FF4F8B;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_workflows_for_apache_airflow;fontFamily=Helvetica;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1908" y="740.25" width="199.75" height="199.75" as="geometry" />
+        </mxCell>
+        <mxCell id="D-cZPUOV2xCUMHWo-okC-3" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;MWAA instance&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="KEZqLQ1N2geyIQ-xhBZk-1" vertex="1">
+          <mxGeometry x="1897.87" y="696.63" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v3iZwABs2jZpIfSrJHVI-0" value="" style="group" vertex="1" connectable="0" parent="KEZqLQ1N2geyIQ-xhBZk-1">
+          <mxGeometry x="1258" y="447" width="410.4200000000001" height="319.25" as="geometry" />
+        </mxCell>
+        <mxCell id="KEZqLQ1N2geyIQ-xhBZk-43" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;MWAA S3 Bucket&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=top;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="v3iZwABs2jZpIfSrJHVI-0" vertex="1">
+          <mxGeometry x="30" y="40" width="380.42" height="279.25" as="geometry" />
+        </mxCell>
+        <mxCell id="ugHWY-jnCkU6N2jLu0gr-3" value="&lt;h1 style=&quot;line-height: 110%; font-size: 16px;&quot;&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;├── source/&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;│&amp;nbsp; &amp;nbsp;└── domain.dataproduct.0.dag.py&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;└── dags/&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&amp;nbsp; &amp;nbsp; └── domain.dataproduct.0.dag.py&lt;/span&gt;&lt;br&gt;&lt;/h1&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Note:&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;ul style=&quot;&quot;&gt;&lt;li style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;source/ is the &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;b&gt;staging&lt;/b&gt;&amp;nbsp;path&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;li style=&quot;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;dags/ is the &lt;b style=&quot;&quot;&gt;final&lt;/b&gt;&amp;nbsp;path&lt;/font&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;" parent="v3iZwABs2jZpIfSrJHVI-0" vertex="1">
+          <mxGeometry x="39.88999999999987" y="103" width="360.65" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="mUgCoobgLQafgeZf694w-4" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;fontFamily=Helvetica;" parent="v3iZwABs2jZpIfSrJHVI-0" vertex="1">
+          <mxGeometry width="78" height="78" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Provisioning and unprovisioning" id="HlEBFxBSwHhaApRulJSV">
+    <mxGraphModel dx="3191" dy="3391" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="CrBskSO4nDhFndBRX1B0-0" />
+        <mxCell id="CrBskSO4nDhFndBRX1B0-1" parent="CrBskSO4nDhFndBRX1B0-0" />
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-22" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;MWAA SP&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="399" y="-1120" width="681" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="CrBskSO4nDhFndBRX1B0-4" value="1 - Validate provisioning request" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;spacingLeft=8;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="429" y="-1030" width="620" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CrBskSO4nDhFndBRX1B0-27" value="&lt;span style=&quot;background-color: initial;&quot;&gt;The corresponding unprovisioning operation is very simple: just delete the DAG file from the final path&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Step 3 becomes a delete&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/span&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;verticalAlign=top;spacingLeft=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="1480" y="-1398.75" width="360" height="202.5" as="geometry" />
+        </mxCell>
+        <mxCell id="JZihHBsl7QY_d6qNJ1pM-1" value="&lt;font data-font-src=&quot;https://fonts.googleapis.com/css?family=Nunito&quot; face=&quot;Nunito&quot;&gt;Idempotent, ie does not fail if something it provisions already exists.&lt;/font&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;hachureGap=4;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;position2=0;size=40;position=0.13;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="1079" y="-1250" width="241" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-0" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" source="1LrZQP8tYeefJCKVqhzE-4" target="1LrZQP8tYeefJCKVqhzE-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-1" value="Deploy,&lt;br&gt;update DP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="1LrZQP8tYeefJCKVqhzE-0" vertex="1" connectable="0">
+          <mxGeometry x="-0.0027" y="-2" relative="1" as="geometry">
+            <mxPoint x="7" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-4" value="DP team" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;hachureGap=4;fontFamily=Nunito;fontSize=16;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="369" y="-1400" width="60" height="117.5" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-5" value="" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" source="1LrZQP8tYeefJCKVqhzE-7" target="1LrZQP8tYeefJCKVqhzE-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-6" value="Deploy,&lt;br&gt;update DP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="1LrZQP8tYeefJCKVqhzE-5" vertex="1" connectable="0">
+          <mxGeometry x="0.3239" relative="1" as="geometry">
+            <mxPoint x="-26" y="-24" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-7" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;Witboost&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=middle;fillColor=#fff2cc;strokeColor=#d6b656;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;glass=0;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="559" y="-1400" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-8" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=1;rounded=0;hachureGap=4;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Nunito;fontSize=16;fontColor=default;endArrow=classic;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="CrBskSO4nDhFndBRX1B0-1" source="1LrZQP8tYeefJCKVqhzE-9" target="1LrZQP8tYeefJCKVqhzE-22" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-881.8900000000001" y="-593.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-9" value="Provisioning Coordinator" style="whiteSpace=wrap;html=1;fontSize=20;fontFamily=Nunito;fillColor=#fff2cc;strokeColor=#d6b656;rounded=0;hachureGap=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;glass=0;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="879" y="-1398.75" width="200" height="118.75" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-10" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Provisioning request&lt;/font&gt;&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Nunito;fontColor=default;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="879" y="-1227" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;entryX=-0.004;entryY=0.536;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="CrBskSO4nDhFndBRX1B0-1" source="RHufipWkyzRZhh8fAMYA-1" target="sJpFRx6Bym_rXe7pHoia-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1469.269041469714" y="-819.9000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-12" value="Copy/delete DAG files&lt;br&gt;between staging and final&lt;br&gt;paths" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Nunito;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;fontSize=16;" parent="1LrZQP8tYeefJCKVqhzE-11" vertex="1" connectable="0">
+          <mxGeometry x="0.0402" y="7" relative="1" as="geometry">
+            <mxPoint y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1LrZQP8tYeefJCKVqhzE-28" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#FF4F8B;gradientDirection=north;fillColor=#BC1356;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_workflows_for_apache_airflow;fontFamily=Helvetica;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="360" y="-1157" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="RHufipWkyzRZhh8fAMYA-0" value="2 - Extract metadata (domain name, DP name, DP version, DAG name, etc)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;spacingLeft=8;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="429" y="-950" width="620" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RHufipWkyzRZhh8fAMYA-1" value="3 - Copy DAG to final path (object name is built using metadata above)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;spacingLeft=8;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="429.5" y="-870" width="620" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RHufipWkyzRZhh8fAMYA-2" value="4 - Report outcome" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;spacingLeft=8;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" parent="CrBskSO4nDhFndBRX1B0-1" vertex="1">
+          <mxGeometry x="429.5" y="-790" width="620" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sJpFRx6Bym_rXe7pHoia-0" value="" style="group" vertex="1" connectable="0" parent="CrBskSO4nDhFndBRX1B0-1">
+          <mxGeometry x="1440" y="-1030" width="410.4200000000001" height="319.25" as="geometry" />
+        </mxCell>
+        <mxCell id="sJpFRx6Bym_rXe7pHoia-1" value="&lt;font style=&quot;font-size: 25px;&quot;&gt;MWAA S3 Bucket&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;hachureGap=4;fontFamily=Nunito;fontSize=20;verticalAlign=top;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" vertex="1" parent="sJpFRx6Bym_rXe7pHoia-0">
+          <mxGeometry x="30" y="40" width="380.42" height="279.25" as="geometry" />
+        </mxCell>
+        <mxCell id="sJpFRx6Bym_rXe7pHoia-2" value="&lt;h1 style=&quot;line-height: 110%; font-size: 16px;&quot;&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;├── source/&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;│&amp;nbsp; &amp;nbsp;└── domain.dataproduct.0.dag.py&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;└── dags/&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color); font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&amp;nbsp; &amp;nbsp; └── domain.dataproduct.0.dag.py&lt;/span&gt;&lt;br&gt;&lt;/h1&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;Note:&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;ul style=&quot;&quot;&gt;&lt;li style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-weight: 400;&quot;&gt;source/ is the &lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;b&gt;staging&lt;/b&gt;&amp;nbsp;path&lt;/span&gt;&lt;/font&gt;&lt;/li&gt;&lt;li style=&quot;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;dags/ is the &lt;b style=&quot;&quot;&gt;final&lt;/b&gt;&amp;nbsp;path&lt;/font&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=11;fontFamily=Helvetica;fontColor=default;" vertex="1" parent="sJpFRx6Bym_rXe7pHoia-0">
+          <mxGeometry x="39.88999999999987" y="103" width="360.65" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="sJpFRx6Bym_rXe7pHoia-3" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#60A337;gradientDirection=north;fillColor=#277116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;fontFamily=Helvetica;" vertex="1" parent="sJpFRx6Bym_rXe7pHoia-0">
+          <mxGeometry width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="FvK3etwAvJokyo_bT2Fi-0" value="The DAG file name is composed as follows:&lt;br&gt;&amp;lt;domain name&amp;gt;.&amp;lt;data product name&amp;gt;.&amp;lt;data product major version&amp;gt;.&amp;lt;original name (in the repository)&amp;gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;hachureGap=4;fontFamily=Nunito;fontSize=20;align=left;verticalAlign=top;spacingLeft=4;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNunito;" vertex="1" parent="CrBskSO4nDhFndBRX1B0-1">
+          <mxGeometry x="719.5" y="-640" width="960" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

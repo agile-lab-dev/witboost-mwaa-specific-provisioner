@@ -137,3 +137,9 @@ client-generated/docs/
 client-generated/project/build.properties
 openapitools.json
 credentials
+
+# jEnv
+.java-version
+
+# Draw.io backup files
+*.drawio.bkp
