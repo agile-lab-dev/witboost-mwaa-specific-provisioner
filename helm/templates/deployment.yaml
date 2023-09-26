@@ -16,7 +16,8 @@ spec:
         app: {{ template "mwaa-specific-provisioner.name" . }}
         actorSystemName: {{ template "mwaa-specific-provisioner.name" . }}
     spec:
-      automountServiceAccountToken: false
+      serviceAccountName: mwaa-service-account
+      automountserviceaccounttoken: false
       {{- if .Values.dockerRegistrySecretName }}
       imagePullSecrets:
         - name: {{ .Values.dockerRegistrySecretName }}
