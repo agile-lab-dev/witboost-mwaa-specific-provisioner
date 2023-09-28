@@ -8,22 +8,27 @@ import akka.http.scaladsl.server.Directives.complete
 import akka.http.scaladsl.server.directives.{Credentials, SecurityDirectives}
 import buildinfo.BuildInfo
 import com.typesafe.scalalogging.LazyLogging
+import it.agilelab.datamesh.mwaaspecificprovisioner.api.SpecificProvisionerApi
 import it.agilelab.datamesh.mwaaspecificprovisioner.api.intepreter.{
   ProvisionerApiMarshallerImpl,
   ProvisionerApiServiceImpl
 }
-import it.agilelab.datamesh.mwaaspecificprovisioner.api.{SpecificProvisionerApi, SpecificProvisionerApiService}
+import it.agilelab.datamesh.mwaaspecificprovisioner.mwaa.MwaaManager
 import it.agilelab.datamesh.mwaaspecificprovisioner.s3.gateway.{S3Gateway, S3GatewayMock}
 import it.agilelab.datamesh.mwaaspecificprovisioner.server.Controller
 import it.agilelab.datamesh.mwaaspecificprovisioner.system.ApplicationConfiguration.{httpPort, isMock}
+
 import scala.jdk.CollectionConverters._
 
 object Main extends LazyLogging {
 
-  def run(port: Int, impl: SpecificProvisionerApiService): ActorSystem[Nothing] = ActorSystem[Nothing](
+  def run(port: Int): ActorSystem[Nothing] = ActorSystem[Nothing](
     Behaviors.setup[Nothing] { context =>
       import akka.actor.typed.scaladsl.adapter._
       implicit val classicSystem: actor.ActorSystem = context.system.toClassic
+
+      val manager = new MwaaManager(clientAws)
+      val impl    = new ProvisionerApiServiceImpl(manager)
 
       val api = new SpecificProvisionerApi(
         impl,
@@ -69,5 +74,5 @@ object Main extends LazyLogging {
       }
     }
 
-  def main(args: Array[String]): Unit = { val _ = run(httpPort, new ProvisionerApiServiceImpl(clientAws)) }
+  def main(args: Array[String]): Unit = { val _ = run(httpPort) }
 }
