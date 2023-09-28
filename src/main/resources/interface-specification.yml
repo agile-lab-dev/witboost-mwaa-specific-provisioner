@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Specific Provisioner Micro Service
   description: 'Microservice responsible to handle provisioning and access control requests for one or more data product components.'
-  version: '2.1.0'
+  version: '2.2.0'
 tags:
   - name: SpecificProvisioner
     description: All the provisioning related operations
