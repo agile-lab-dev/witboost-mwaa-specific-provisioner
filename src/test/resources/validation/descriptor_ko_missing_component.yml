@@ -1,0 +1,24 @@
+dataProduct:
+  dataProductOwnerDisplayName: Cristian Astorino
+  environment: development
+  domain: demographic
+  kind: dataproduct
+  domainId: urn:dmb:dmn:demographic
+  id: urn:dmb:dp:demographic:dp-to-test-mwaa-fix:0
+  description: DP to test MWAA fix WIT-567
+  devGroup: agile_lab
+  ownerGroup: cristian.astorino_agilelab.it
+  dataProductOwner: user:cristian.astorino_agilelab.it
+  email: cristian.astorino@agilelab.it
+  version: 0.1.0-SNAPSHOT-1
+  fullyQualifiedName: null
+  name: DP to test MWAA fix
+  informationSLA: null
+  maturity: null
+  useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:dataproduct-provisioner:1
+  billing: {}
+  tags: []
+  specific: {}
+  components: []
+componentIdToProvision: urn:dmb:cmp:demographic:dp-to-test-mwaa-fix:0:airflow-workload-test-fix

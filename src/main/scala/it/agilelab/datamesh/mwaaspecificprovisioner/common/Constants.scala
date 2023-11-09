@@ -15,4 +15,5 @@ object Constants {
   val SOURCE_DAG_PATH_FIELD            = "sourcePath"
   val BUCKET_NAME_FIELD                = "bucketName"
   val DAG_NAME_FIELD                   = "dagName"
+  val SCHEDULE_CRON_FIELD              = "scheduleCron"
 }

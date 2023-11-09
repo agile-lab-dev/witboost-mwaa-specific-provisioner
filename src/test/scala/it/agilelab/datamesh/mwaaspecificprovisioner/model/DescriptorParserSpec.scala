@@ -77,4 +77,39 @@ class DescriptorParserSpec extends AnyFlatSpec {
     dp.left.value should be(a[NonEmptyList[_]])
   }
 
+  "Parsing a well formed json component" should "return a correct ComponentDescriptor" in {
+    import io.circe._, io.circe.parser._
+    val rawHeader: String = """
+    {
+      "name": "Airflow Workload Test Fix",
+      "kind": "workload",
+      "infrastructureTemplateId": "urn:dmb:itm:aws-workload-airflow-provisioner:0",
+      "useCaseTemplateId": "urn:dmb:utm:aws-airflow-workload-template:0.0.0"
+    }
+    """
+    val rawSpecific       = "{}"
+
+    val component =
+      new ComponentDescriptor("", "", parse(rawHeader).getOrElse(Json.Null), parse(rawSpecific).getOrElse(Json.Null))
+
+    component.getName should be(Right("Airflow Workload Test Fix"))
+    component.getKind should be(Right("workload"))
+    component.getInfrastructureTemplateId should be(Right("urn:dmb:itm:aws-workload-airflow-provisioner:0"))
+    component.getUseCaseTemplateId should be(Right(Some("urn:dmb:utm:aws-airflow-workload-template:0.0.0")))
+  }
+
+  "Parsing a wrong json component" should "fail" in {
+    import io.circe._, io.circe.parser._
+    val rawHeader   = "{}"
+    val rawSpecific = "{}"
+
+    val component =
+      new ComponentDescriptor("", "", parse(rawHeader).getOrElse(Json.Null), parse(rawSpecific).getOrElse(Json.Null))
+
+    component.getName.isLeft should be(true)
+    component.getKind.isLeft should be(true)
+    component.getInfrastructureTemplateId.isLeft should be(true)
+    component.getUseCaseTemplateId.getOrElse(None).isDefined should be(false)
+  }
+
 }

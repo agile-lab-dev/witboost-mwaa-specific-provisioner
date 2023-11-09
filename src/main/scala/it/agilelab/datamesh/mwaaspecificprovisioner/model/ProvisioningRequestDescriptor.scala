@@ -19,7 +19,7 @@ object ProvisioningRequestDescriptor {
   }
 
   def apply(yaml: String): EitherNel[String, ProvisioningRequestDescriptor] = {
-    val maybePr: Either[Serializable, ProvisioningRequestDescriptor] = for {
+    val maybePr: Either[String, ProvisioningRequestDescriptor] = for {
       dataProduct            <- DataProductDescriptor(yaml)
       componentIdToProvision <- getComponentIdToProvision(yaml)
     } yield ProvisioningRequestDescriptor(dataProduct, componentIdToProvision)

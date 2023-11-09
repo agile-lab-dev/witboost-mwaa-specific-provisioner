@@ -3,14 +3,12 @@ package it.agilelab.datamesh.mwaaspecificprovisioner.api.intepreter
 import akka.http.scaladsl.marshalling.ToEntityMarshaller
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
-import cats.data.NonEmptyList
-import cats.implicits.toShow
+import cats.data.Validated.{Invalid, Valid}
 import com.typesafe.scalalogging.LazyLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport.{marshaller, unmarshaller}
 import it.agilelab.datamesh.mwaaspecificprovisioner.api.SpecificProvisionerApiService
 import it.agilelab.datamesh.mwaaspecificprovisioner.model._
-import it.agilelab.datamesh.mwaaspecificprovisioner.mwaa.{MwaaManager, MwaaManagerError}
-import it.agilelab.datamesh.mwaaspecificprovisioner.s3.gateway.S3GatewayError
+import it.agilelab.datamesh.mwaaspecificprovisioner.mwaa.MwaaManager
 
 class ProvisionerApiServiceImpl(mwaaManager: MwaaManager) extends SpecificProvisionerApiService with LazyLogging {
 
@@ -59,23 +57,18 @@ class ProvisionerApiServiceImpl(mwaaManager: MwaaManager) extends SpecificProvis
       toEntityMarshallerRequestValidationError: ToEntityMarshaller[RequestValidationError],
       toEntityMarshallerSystemError: ToEntityMarshaller[SystemError],
       toEntityMarshallerProvisioningStatus: ToEntityMarshaller[ProvisioningStatus]
-  ): Route = ProvisioningRequestDescriptor(provisioningRequest.descriptor).flatMap(mwaaManager.executeProvision) match {
-    case Left(e: S3GatewayError)   =>
-      logger.error(e.show)
-      provision500(SystemError(e.show))
-    case Left(e: MwaaManagerError) =>
-      logger.error(e.errorMessage)
-      provision500(SystemError(e.errorMessage))
-    case Left(e: NonEmptyList[_])  =>
-      logger.error(e.head.toString)
-      provision400(RequestValidationError(e.toList.map(_.toString)))
-    case Right(_)                  =>
-      logger.info("OK")
-      provision200(ProvisioningStatus(ProvisioningStatusEnums.StatusEnum.COMPLETED, "OK"))
-    case other                     =>
-      logger.error("Generic Error. Received {}", other)
-      provision500(SystemError("Generic Error"))
-  }
+  ): Route =
+    try mwaaManager.executeProvision(provisioningRequest.descriptor) match {
+        case Valid(_)   => provision200(ProvisioningStatus(ProvisioningStatusEnums.StatusEnum.COMPLETED, "OK"))
+        case Invalid(e) => provision400(RequestValidationError(e.toList.map(_.errorMessage)))
+      }
+    catch {
+      case t: Throwable =>
+        logger.error(s"Exception in provision", t)
+        provision500(SystemError(
+          s"An unexpected error occurred while processing the request. Please try again and if the problem persists contact the platform team. Details: ${t.getMessage}"
+        ))
+    }
 
   /** Code: 200, Message: It synchronously returns the request result, DataType: String
    *  Code: 400, Message: Invalid input, DataType: RequestValidationError
@@ -85,7 +78,20 @@ class ProvisionerApiServiceImpl(mwaaManager: MwaaManager) extends SpecificProvis
       contexts: Seq[(String, String)],
       toEntityMarshallerSystemError: ToEntityMarshaller[SystemError],
       toEntityMarshallerValidationResult: ToEntityMarshaller[ValidationResult]
-  ): Route = validate200(ValidationResult(valid = true))
+  ): Route =
+    try mwaaManager.executeValidation(provisioningRequest.descriptor) match {
+        case Valid(_)   => validate200(ValidationResult(valid = true))
+        case Invalid(e) =>
+          val errors = e.map(_.errorMessage).toList
+          validate200(ValidationResult(valid = false, error = Some(ValidationError(errors))))
+      }
+    catch {
+      case t: Throwable =>
+        logger.error(s"Exception in validate", t)
+        validate500(SystemError(
+          s"An unexpected error occurred while processing the request. Please try again and if the problem persists contact the platform team. Details: ${t.getMessage}"
+        ))
+    }
 
   /** Code: 200, Message: It synchronously returns the request result, DataType: ProvisioningStatus
    *  Code: 202, Message: If successful returns a provisioning deployment task token that can be used for polling the request status, DataType: String
@@ -98,22 +104,16 @@ class ProvisionerApiServiceImpl(mwaaManager: MwaaManager) extends SpecificProvis
       toEntityMarshallerSystemError: ToEntityMarshaller[SystemError],
       toEntityMarshallerProvisioningStatus: ToEntityMarshaller[ProvisioningStatus]
   ): Route =
-    ProvisioningRequestDescriptor(provisioningRequest.descriptor).flatMap(mwaaManager.executeUnprovision) match {
-      case Left(e: S3GatewayError)   =>
-        logger.error(e.show)
-        provision500(SystemError(e.show))
-      case Left(e: MwaaManagerError) =>
-        logger.error(e.errorMessage)
-        provision500(SystemError(e.errorMessage))
-      case Left(e: NonEmptyList[_])  =>
-        logger.error(e.head.toString)
-        provision400(RequestValidationError(e.toList.map(_.toString)))
-      case Right(_)                  =>
-        logger.info("OK")
-        provision200(ProvisioningStatus(ProvisioningStatusEnums.StatusEnum.COMPLETED, "OK"))
-      case other                     =>
-        logger.error("Generic Error. Received {}", other)
-        provision500(SystemError("Generic Error"))
+    try mwaaManager.executeUnprovision(provisioningRequest.descriptor) match {
+        case Valid(_)   => unprovision200(ProvisioningStatus(ProvisioningStatusEnums.StatusEnum.COMPLETED, "OK"))
+        case Invalid(e) => unprovision400(RequestValidationError(e.toList.map(_.errorMessage)))
+      }
+    catch {
+      case t: Throwable =>
+        logger.error(s"Exception in unprovision", t)
+        unprovision500(SystemError(
+          s"An unexpected error occurred while processing the request. Please try again and if the problem persists contact the platform team. Details: ${t.getMessage}"
+        ))
     }
 
   /** Code: 200, Message: It synchronously returns the access request response, DataType: ProvisioningStatus
@@ -126,7 +126,7 @@ class ProvisionerApiServiceImpl(mwaaManager: MwaaManager) extends SpecificProvis
       toEntityMarshallerRequestValidationError: ToEntityMarshaller[RequestValidationError],
       toEntityMarshallerSystemError: ToEntityMarshaller[SystemError],
       toEntityMarshallerProvisioningStatus: ToEntityMarshaller[ProvisioningStatus]
-  ): Route = updateacl200(ProvisioningStatus(ProvisioningStatusEnums.StatusEnum.COMPLETED, "OK"))
+  ): Route = updateacl500(NotImplementedError)
 
   /** Code: 202, Message: It returns a token that can be used for polling the async validation operation status and results, DataType: String
    *  Code: 400, Message: Invalid input, DataType: RequestValidationError

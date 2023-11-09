@@ -6,16 +6,21 @@ import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.{Directive1, RequestContext, Route}
 import akka.http.scaladsl.testkit.{RouteTestTimeout, ScalatestRouteTest}
 import akka.testkit.TestDuration
+import cats.data.{NonEmptyList, Validated}
+import cats.data.Validated.Valid
 import com.typesafe.scalalogging.StrictLogging
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport
+import io.circe.Json
 import it.agilelab.datamesh.mwaaspecificprovisioner.api.SpecificProvisionerApi
 import it.agilelab.datamesh.mwaaspecificprovisioner.api.intepreter.{
   ProvisionerApiMarshallerImpl,
   ProvisionerApiServiceImpl
 }
 import it.agilelab.datamesh.mwaaspecificprovisioner.common.test.getTestResourceAsString
+import it.agilelab.datamesh.mwaaspecificprovisioner.error.{InvalidDagName, InvalidDescriptor, ProvisionErrorType}
 import it.agilelab.datamesh.mwaaspecificprovisioner.model._
-import it.agilelab.datamesh.mwaaspecificprovisioner.mwaa.{MwaaManager, SendRequestError}
+import it.agilelab.datamesh.mwaaspecificprovisioner.mwaa.MwaaManager
+import it.agilelab.datamesh.mwaaspecificprovisioner.s3.gateway.S3GatewayError.S3GatewayInitError
 import it.agilelab.datamesh.mwaaspecificprovisioner.server.Controller
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.flatspec.AnyFlatSpec
@@ -65,7 +70,8 @@ class ProvisionerApiServiceImplSpec
     "synchronously validate with no errors when a valid descriptor is passed as input" in {
       val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = "valid", removeData = false)
 
-      /* TODO when validation is done */
+      val _ = (mwaaManager.executeValidation _).expects(*)
+        .returns(Valid(MwaaFields("", ComponentDescriptor("", "", Json.Null, Json.Null), "", "", "", "")))
 
       Post("/v1/validate", request) ~> api.route ~> check {
         val response = responseAs[ValidationResult]
@@ -74,11 +80,33 @@ class ProvisionerApiServiceImplSpec
       }
     }
 
+  it should "return a validation error if validation fails" in {
+    val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = "invalid", removeData = false)
+
+    val _ = (mwaaManager.executeValidation _).expects(*)
+      .returns(Validated.invalidNel(InvalidDagName("", new Throwable(""))))
+
+    Post("/v1/validate", request) ~> api.route ~> check {
+      val response = responseAs[ValidationResult]
+      response.valid shouldEqual false
+      response.error.isDefined shouldBe true
+    }
+  }
+
+  it should "raise an error if there's an uncaught exception while validating" in {
+    val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
+    val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
+
+    val _ = (mwaaManager.executeValidation _).expects(*).throws(new Throwable(""))
+
+    Post("/v1/validate", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.InternalServerError)
+  }
+
   it should "synchronously provision when a valid descriptor is passed as input" in {
     val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
 
-    val _ = (mwaaManager.executeProvision _).expects(*).returns(Right(()))
+    val _ = (mwaaManager.executeProvision _).expects(*).returns(Valid(()))
 
     Post("/v1/provision", request) ~> api.route ~> check {
       val response = responseAs[ProvisioningStatus]
@@ -89,6 +117,9 @@ class ProvisionerApiServiceImplSpec
   it should "raise an error if provision received descriptor is not valid" in {
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = "invalid", removeData = false)
 
+    val _ = (mwaaManager.executeProvision _).expects(*)
+      .returns(Validated.invalidNel(InvalidDescriptor(NonEmptyList.one(""))))
+
     Post("/v1/provision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.BadRequest)
   }
 
@@ -96,7 +127,17 @@ class ProvisionerApiServiceImplSpec
     val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
 
-    val _ = (mwaaManager.executeProvision _).expects(*).returns(Left(SendRequestError("dagName", "an error")))
+    val _ = (mwaaManager.executeProvision _).expects(*)
+      .returns(Validated.invalidNel(ProvisionErrorType(S3GatewayInitError(new Throwable("")))))
+
+    Post("/v1/provision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.BadRequest)
+  }
+
+  it should "raise an error if there's an uncaught exception while provisioning" in {
+    val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
+    val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
+
+    val _ = (mwaaManager.executeProvision _).expects(*).throws(new Throwable(""))
 
     Post("/v1/provision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.InternalServerError)
   }
@@ -105,7 +146,7 @@ class ProvisionerApiServiceImplSpec
     val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
 
-    val _ = (mwaaManager.executeUnprovision _).expects(*).returns(Right(()))
+    val _ = (mwaaManager.executeUnprovision _).expects(*).returns(Valid(()))
 
     Post("/v1/unprovision", request) ~> api.route ~> check {
       val response = responseAs[ProvisioningStatus]
@@ -116,6 +157,9 @@ class ProvisionerApiServiceImplSpec
   it should "raise an error if unprovision received descriptor is not valid" in {
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = "invalid", removeData = false)
 
+    val _ = (mwaaManager.executeUnprovision _).expects(*)
+      .returns(Validated.invalidNel(InvalidDescriptor(NonEmptyList.one(""))))
+
     Post("/v1/unprovision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.BadRequest)
   }
 
@@ -123,19 +167,53 @@ class ProvisionerApiServiceImplSpec
     val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
     val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
 
-    val _ = (mwaaManager.executeUnprovision _).expects(*).returns(Left(SendRequestError("dagName", "an error")))
+    val _ = (mwaaManager.executeUnprovision _).expects(*)
+      .returns(Validated.invalidNel(ProvisionErrorType(S3GatewayInitError(new Throwable("")))))
+
+    Post("/v1/unprovision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.BadRequest)
+  }
+
+  it should "raise an error if there's an uncaught exception while unprovisioning" in {
+    val yaml    = getTestResourceAsString("pr_descriptors/pr_descriptor_1.yml")
+    val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = yaml, removeData = false)
+
+    val _ = (mwaaManager.executeUnprovision _).expects(*).throws(new Throwable(""))
 
     Post("/v1/unprovision", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.InternalServerError)
   }
 
-  it should "synchronously updateacl when a valid descriptor is passed as input" in {
+  it should "raise an error for an updateAcl request" in {
     val request = UpdateAclRequest(List("sergio.mejia_agilelab.it"), ProvisionInfo("req", "res"))
 
-    Post("/v1/updateacl", request) ~> api.route ~> check {
-      val response = responseAs[ProvisioningStatus]
-      response.status shouldEqual ProvisioningStatusEnums.StatusEnum.COMPLETED
+    Post("/v1/updateacl", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.InternalServerError)
+  }
+
+  it should "raise an error for an async getStatus request" in Get("/v1/provision/token/status") ~> api.route ~> check {
+    response.status shouldEqual StatusCodes.BadRequest
+  }
+
+  it should "raise an error for an async validate request" in {
+    val request = ProvisioningRequest(DATAPRODUCT_DESCRIPTOR, descriptor = "", removeData = false)
+
+    Post("/v2/validate", request) ~> api.route ~> check(response.status shouldEqual StatusCodes.InternalServerError)
+  }
+
+  it should "raise an error for a validate status request" in Get("/v2/validate/token/status") ~> api.route ~> check {
+    response.status shouldEqual StatusCodes.InternalServerError
+  }
+
+  it should "raise an error for a reverse provisioning request" in {
+    val request = ReverseProvisioningRequest("", "")
+
+    Post("/v1/reverse-provisioning", request) ~> api.route ~> check {
+      response.status shouldEqual StatusCodes.InternalServerError
     }
   }
+
+  it should "raise an error for a reverse provisioning status request" in
+    Get("/v1/reverse-provisioning/token/status") ~> api.route ~> check {
+      response.status shouldEqual StatusCodes.InternalServerError
+    }
 
 }
 

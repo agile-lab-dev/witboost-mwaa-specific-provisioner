@@ -7,16 +7,36 @@ import it.agilelab.datamesh.mwaaspecificprovisioner.s3.common.ShowableOps.showTh
 trait S3GatewayError extends Exception with Product with Serializable
 
 object S3GatewayError {
-  final case class S3GatewayInitError(error: Throwable)                                   extends S3GatewayError
-  final case class ObjectExistsErr(bucket: String, key: String, error: Throwable)         extends S3GatewayError
-  final case class CreateFolderErr(bucket: String, folder: String, error: Throwable)      extends S3GatewayError
-  final case class CreateFileErr(bucket: String, key: String, error: Throwable)           extends S3GatewayError
-  final case class GetObjectContentErr(bucket: String, key: String, error: Throwable)     extends S3GatewayError
-  final case class ListObjectsErr(bucket: String, prefix: String, error: Throwable)       extends S3GatewayError
-  final case class ListVersionsErr(bucket: String, prefix: String, error: Throwable)      extends S3GatewayError
-  final case class ListDeleteMarkersErr(bucket: String, prefix: String, error: Throwable) extends S3GatewayError
-  final case class CopyObjectErr(source: String, dest: String, error: Throwable)          extends S3GatewayError
-  final case class DeleteObjectErr(bucket: String, obj: String, error: Throwable)         extends S3GatewayError
+  final case class S3GatewayInitError(error: Throwable)                                   extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class ObjectExistsErr(bucket: String, key: String, error: Throwable)         extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class CreateFolderErr(bucket: String, folder: String, error: Throwable)      extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class CreateFileErr(bucket: String, key: String, error: Throwable)           extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class GetObjectContentErr(bucket: String, key: String, error: Throwable)     extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class ListObjectsErr(bucket: String, prefix: String, error: Throwable)       extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class ListVersionsErr(bucket: String, prefix: String, error: Throwable)      extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class ListDeleteMarkersErr(bucket: String, prefix: String, error: Throwable) extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class CopyObjectErr(source: String, dest: String, error: Throwable)          extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
+  final case class DeleteObjectErr(bucket: String, obj: String, error: Throwable)         extends S3GatewayError {
+    override def getMessage: String = error.getMessage
+  }
 
   implicit val showS3GatewayError: Show[S3GatewayError] = Show.show {
     case e: S3GatewayInitError   => show"S3GatewayInitError(${e.error})"

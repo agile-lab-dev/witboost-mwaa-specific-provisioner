@@ -114,16 +114,15 @@ lazy val root = (project in file(".")).settings(
   name                        := "datamesh.mwaaspecificprovisioner",
   Test / parallelExecution    := false,
   dockerBuildOptions ++= Seq("--network=host"),
-  dockerBaseImage             := "adoptopenjdk:11-jdk-hotspot",
+  dockerBaseImage             := "eclipse-temurin:17-jre-jammy",
   dockerUpdateLatest          := true,
   daemonUser                  := "daemon",
   Docker / version            := (ThisBuild / version).value,
   Docker / packageName        :=
     s"registry.gitlab.com/agilefactory/witboost.mesh/provisioning/sandbox/witboost.mesh.provisioning.sandbox.mwaaspecificprovisioner",
-  Docker / dockerExposedPorts := Seq(8080),
+  Docker / dockerExposedPorts := Seq(8093),
   onChangedBuildSource        := ReloadOnSourceChanges,
   scalafixOnCompile           := true,
   semanticdbEnabled           := true,
   semanticdbVersion           := scalafixSemanticdb.revision
-).aggregate(clientGenerated).dependsOn(serverGenerated, awsIntegration).enablePlugins(JavaAppPackaging, MultiJvmPlugin)
-  .configs(MultiJvm).setupBuildInfo
+).aggregate(clientGenerated).dependsOn(serverGenerated, awsIntegration).enablePlugins(JavaAppPackaging).setupBuildInfo

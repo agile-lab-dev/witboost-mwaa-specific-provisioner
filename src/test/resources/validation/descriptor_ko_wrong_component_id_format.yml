@@ -1,0 +1,45 @@
+dataProduct:
+  dataProductOwnerDisplayName: Cristian Astorino
+  environment: development
+  domain: demographic
+  kind: dataproduct
+  domainId: urn:dmb:dmn:demographic
+  id: urn:dmb:dp:demographic:dp-to-test-mwaa-fix:0
+  description: DP to test MWAA fix WIT-567
+  devGroup: agile_lab
+  ownerGroup: cristian.astorino_agilelab.it
+  dataProductOwner: user:cristian.astorino_agilelab.it
+  email: cristian.astorino@agilelab.it
+  version: 0.1.0-SNAPSHOT-1
+  fullyQualifiedName: null
+  name: DP to test MWAA fix
+  informationSLA: null
+  maturity: null
+  useCaseTemplateId: urn:dmb:utm:dataproduct-template:0.0.0
+  infrastructureTemplateId: urn:dmb:itm:dataproduct-provisioner:1
+  billing: {}
+  tags: []
+  specific: {}
+  components:
+    - kind: workload
+      id: urn:dmb:cmp:demographic:dp-to-test-mwaa-fix
+      description: Airflow Workload Test Fix WIT-567
+      name: Airflow Workload Test Fix
+      fullyQualifiedName: null
+      version: 0.0.0
+      infrastructureTemplateId: urn:dmb:itm:aws-workload-airflow-provisioner:0
+      useCaseTemplateId: urn:dmb:utm:aws-airflow-workload-template:0.0.0
+      dependsOn: []
+      platform: AWS
+      technology: airflow
+      workloadType: batch
+      connectionType: DataPipeline
+      tags: []
+      readsFrom: []
+      specific:
+        scheduleCron: 5 5 * * *
+        dagName: airbyte_snowflake_dag_custom_wit_567.py
+        destinationPath: dags/
+        sourcePath: source/
+        bucketName: sandbox-qa-mwaa-eu-west-1-278435202378
+componentIdToProvision: urn:dmb:cmp:demographic:dp-to-test-mwaa-fix
