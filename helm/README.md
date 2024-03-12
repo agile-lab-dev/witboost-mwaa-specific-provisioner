@@ -8,6 +8,7 @@ A Helm chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| annotations."reloader.stakater.com/auto" | string | `"true"` |  |
 | configOverride | string | `nil` | This configuration allows you to override the application.conf file |
 | credentials | object | `{"awsRegion":null,"roleArn":null}` | AWS credentials spec |
 | dockerRegistrySecretName | string | `"regcred"` | Docker Registry Secret name used to access a private repo |
