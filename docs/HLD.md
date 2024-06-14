@@ -26,13 +26,15 @@ To enable the above orchestration a SP exposes an API made up of five main opera
 
 This Specific Provisioner interacts with a MWAA Environment by updating objects in the corresponding S3 bucket and is able to provision Workloads (Airflow DAGs) used to orchestrate other components in the Data Product.
 
-Every time the DAG code on the component repository is updated by the developer, a CI/CD pipeline is triggered and the DAG file is placed in a staging location with an appropriate prefix. The DAG file name is composed as follows: `<domain name>.<data product name>.<data product major version>.<original name (in the repository)>`. When the deployment of the Data Product (and hence the Workload) is triggered, the Specific Provisioner copies the DAG file from the staging directory into the final directory, where it is picked up by Airflow and loaded.
+Every time the DAG code on the component repository is updated by the developer, a CI/CD pipeline is triggered and the DAG file is placed in a staging location with an appropriate prefix. The DAG file name is composed as follows: `<domain name>.<data product name>.<data product major version>.<original name (in the repository)>`. When the deployment of the Data Product (and hence the Workload) is triggered, the Specific Provisioner copies the DAG file from the staging directory into the final directory, where it is picked up by Airflow and loaded. 
+
+Additionally, the Specific Provisioner also does the same for the Data Product Descriptor file, in order to make it available to the workload.
 
 ![overview](img/overview.png)
 
 ## Workload Provisioning
 
-Workload provisioning/unprovisioning is pretty straightfoward because as stated above the main operation done in this phase is a copy (delete for unprovisioning) between the staging and final directories.
+Workload provisioning/unprovisioning is pretty straightfoward because as stated above the two main operations done in this phase are a copy of the DAG file (delete for unprovisioning) between the staging and final directories and the creation (delete for unprovisioning) of the Data Product Descriptor file.
 
 ![provisioning-unprovisioning](img/provisioning-unprovisioning.png)
 
