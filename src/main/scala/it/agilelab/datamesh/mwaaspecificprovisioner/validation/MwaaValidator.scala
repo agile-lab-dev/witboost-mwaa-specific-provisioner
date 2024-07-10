@@ -67,20 +67,11 @@ class MwaaValidator(s3Gateway: S3Gateway) extends Validator with LazyLogging {
     }.toValidatedNel
 
   private def sourceFileExists(mwaaFields: MwaaFields): ValidatedNel[ValidationErrorType, MwaaFields] = s3Gateway
-    .objectExists(mwaaFields.bucketName, s"${mwaaFields.sourcePath}${mwaaFields.prefix}${mwaaFields.dagName}")
-    .leftMap { error =>
+    .objectExists(mwaaFields.bucketName, mwaaFields.sourceObjectLocation).leftMap { error =>
       logger.error(s"Error in sourceFileExists ${error.show}")
-      ErrorSourceFile(
-        mwaaFields.bucketName,
-        s"${mwaaFields.sourcePath}${mwaaFields.prefix}${mwaaFields.dagName}",
-        error
-      )
+      ErrorSourceFile(mwaaFields.bucketName, mwaaFields.sourceObjectLocation, error)
     }.toValidatedNel.andThen(exists =>
-      Validated.condNel(
-        exists,
-        mwaaFields,
-        MissingSourceFile(mwaaFields.bucketName, s"${mwaaFields.sourcePath}${mwaaFields.prefix}${mwaaFields.dagName}")
-      )
+      Validated.condNel(exists, mwaaFields, MissingSourceFile(mwaaFields.bucketName, mwaaFields.sourceObjectLocation))
     )
 
   override def validate(descriptor: String): ValidatedNel[ValidationErrorType, MwaaFields] =

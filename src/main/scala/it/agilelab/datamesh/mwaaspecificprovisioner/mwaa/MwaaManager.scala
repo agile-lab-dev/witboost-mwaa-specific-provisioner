@@ -29,9 +29,9 @@ class MwaaManager(s3Client: S3Gateway, mwaaValidator: Validator) extends LazyLog
     .andThen { mwaaFields =>
       s3Client.copyObject(
         mwaaFields.bucketName,
-        s"${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix}.${mwaaFields.dagName}",
+        mwaaFields.destinationObjectLocation,
         mwaaFields.bucketName,
-        s"${mwaaFields.sourcePath.ensureTrailingSlash}${mwaaFields.prefix}.${mwaaFields.dagName}"
+        mwaaFields.sourceObjectLocation
       ).leftMap { e =>
         logger.error(s"Error in executeProvision: ${e.show}")
         ProvisionErrorType(e)
@@ -61,10 +61,10 @@ class MwaaManager(s3Client: S3Gateway, mwaaValidator: Validator) extends LazyLog
       }
     }
 
-  def createTmpDescriptorFile(mwaaFields: MwaaFields, extension: String) = File
+  def createTmpDescriptorFile(mwaaFields: MwaaFields, extension: String): File = File
     .createTempFile(s"${mwaaFields.prefix}_descriptor", extension)
 
-  def writeTmpDescriptorFile(descriptor: String, tempFile: File) = {
+  def writeTmpDescriptorFile(descriptor: String, tempFile: File): Unit = {
     val descriptorJson  = parser.parse(descriptor).getOrElse(Json.Null)
     val dataProductJson = descriptorJson.hcursor.downField(Constants.DATA_PRODUCT_FIELD).focus.getOrElse(Json.Null)
     val dataProductYaml = Printer.spaces2.copy(preserveOrder = true).pretty(dataProductJson)
@@ -77,10 +77,7 @@ class MwaaManager(s3Client: S3Gateway, mwaaValidator: Validator) extends LazyLog
 
   def executeUnprovision(descriptor: String): ValidatedNel[ErrorType, Unit] = mwaaValidator.validate(descriptor)
     .andThen { mwaaFields =>
-      s3Client.deleteObject(
-        mwaaFields.bucketName,
-        s"${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix}.${mwaaFields.dagName}"
-      ).leftMap { e =>
+      s3Client.deleteObject(mwaaFields.bucketName, mwaaFields.destinationObjectLocation).leftMap { e =>
         logger.error(s"Error in executeUnprovision: ${e.show}")
         ProvisionErrorType(e)
       }.toValidatedNel.andThen { _ =>
