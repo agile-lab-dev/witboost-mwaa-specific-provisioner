@@ -42,7 +42,8 @@ class MwaaManager(s3Client: S3Gateway, mwaaValidator: Validator) extends LazyLog
             writeTmpDescriptorFile(descriptor, tempFile)
             s3Client.createFile(
               mwaaFields.bucketName,
-              s"${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix}_descriptor.yaml",
+              s"""${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix
+                .replaceAll("[^a-zA-Z0-9_]", "_")}_descriptor.yaml""",
               tempFile
             ).leftMap { e =>
               logger.error(s"Error in executeProvision during descriptor upload: ${e.show}")
@@ -83,7 +84,8 @@ class MwaaManager(s3Client: S3Gateway, mwaaValidator: Validator) extends LazyLog
       }.toValidatedNel.andThen { _ =>
         s3Client.deleteObject(
           mwaaFields.bucketName,
-          s"${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix}_descriptor.yaml"
+          s"""${mwaaFields.destinationPath.ensureTrailingSlash}${mwaaFields.prefix
+            .replaceAll("[^a-zA-Z0-9_]", "_")}_descriptor.yaml"""
         ).leftMap { e =>
           logger.error(s"Error in executeUnprovision during descriptor deleting: ${e.show}")
           ProvisionErrorType(e)
